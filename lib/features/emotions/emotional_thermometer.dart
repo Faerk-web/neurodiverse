@@ -86,7 +86,7 @@ class _EmotionalThermometerState extends State<EmotionalThermometer> {
           mainAxisSize: MainAxisSize.min,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text('Your battery is low. Let\'s recharge safely:'),
+            Text("Your battery is low. Let's recharge safely:"),
             SizedBox(height: 8),
             Text('• 4 deep breaths with visual breathing card'),
             Text('• Put on noise-canceling headphones'),
