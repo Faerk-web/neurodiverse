@@ -96,7 +96,7 @@ class _EmotionalThermometerState extends State<EmotionalThermometer> {
         ),
         actions: [
           FilledButton(
-            onPressed: Navigator.of(context).pop,
+            onPressed: () => Navigator.of(context).pop(),
             child: const Text('I can do this'),
           ),
         ],
