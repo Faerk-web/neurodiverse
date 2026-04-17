@@ -97,8 +97,8 @@ class _VisualCountdownState extends State<VisualCountdown> {
 
   @override
   Widget build(BuildContext context) {
-    const maxSafeDurationInSeconds = Duration.secondsPerDay * 365;
-    final totalSeconds = widget.duration.inSeconds.clamp(1, maxSafeDurationInSeconds);
+    const maxSafeDuration = Duration(days: 365);
+    final totalSeconds = widget.duration.inSeconds.clamp(1, maxSafeDuration.inSeconds);
     final ratio = _remaining.inSeconds / totalSeconds;
 
     return SizedBox(

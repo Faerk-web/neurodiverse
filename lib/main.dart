@@ -85,8 +85,16 @@ class _ModeToggle extends StatelessWidget {
   Widget build(BuildContext context) {
     return SegmentedButton<SupportMode>(
       segments: const [
-        ButtonSegment(value: SupportMode.adhd, label: Text('ADHD')), 
-        ButtonSegment(value: SupportMode.autism, label: Text('Autism')),
+        ButtonSegment(
+          value: SupportMode.adhd,
+          label: Text('ADHD'),
+          tooltip: 'ADHD support mode',
+        ),
+        ButtonSegment(
+          value: SupportMode.autism,
+          label: Text('Autism'),
+          tooltip: 'Autism support mode',
+        ),
       ],
       selected: {mode},
       onSelectionChanged: (selection) => onChanged(selection.first),

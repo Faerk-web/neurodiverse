@@ -13,7 +13,7 @@ class EmotionalThermometer extends StatefulWidget {
 
 class _EmotionalThermometerState extends State<EmotionalThermometer> {
   double _energy = 70;
-  bool _toolboxShownInCurrentRedZone = false;
+  bool _toolboxShown = false;
 
   EnergyLevel get _level {
     if (_energy <= 30) return EnergyLevel.red;
@@ -57,8 +57,8 @@ class _EmotionalThermometerState extends State<EmotionalThermometer> {
                 final newLevel = _level;
                 widget.onEnergyChanged?.call(newLevel);
 
-                if (newLevel == EnergyLevel.red && !_toolboxShownInCurrentRedZone) {
-                  _toolboxShownInCurrentRedZone = true;
+                if (newLevel == EnergyLevel.red && !_toolboxShown) {
+                  _toolboxShown = true;
                   WidgetsBinding.instance.addPostFrameCallback((_) {
                     if (mounted) {
                       _showSensoryToolbox(context);
@@ -67,7 +67,7 @@ class _EmotionalThermometerState extends State<EmotionalThermometer> {
                 }
 
                 if (newLevel != EnergyLevel.red) {
-                  _toolboxShownInCurrentRedZone = false;
+                  _toolboxShown = false;
                 }
               },
             ),

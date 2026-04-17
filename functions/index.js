@@ -5,7 +5,7 @@ const admin = require('firebase-admin');
 admin.initializeApp();
 
 /**
- * Teacher pushes schedule updates (vikarsikring/schedule changes) to one or more children.
+ * Teacher pushes schedule updates (temporary schedule changes) to one or more children.
  * Input document path: schools/{schoolId}/teacherUpdates/{updateId}
  * Expected payload: {
  *   childIds: string[],
