@@ -14,6 +14,8 @@ class EmotionalThermometer extends StatefulWidget {
 class _EmotionalThermometerState extends State<EmotionalThermometer> {
   double _energy = 70;
   bool _toolboxShown = false;
+  bool _toolboxDialogOpen = false;
+  bool _resetToolboxAfterDismiss = false;
 
   EnergyLevel get _level {
     if (_energy <= 30) return EnergyLevel.red;
@@ -60,14 +62,18 @@ class _EmotionalThermometerState extends State<EmotionalThermometer> {
                 if (newLevel == EnergyLevel.red && !_toolboxShown) {
                   _toolboxShown = true;
                   WidgetsBinding.instance.addPostFrameCallback((_) {
-                    if (mounted) {
+                    if (mounted && !_toolboxDialogOpen) {
                       _showSensoryToolbox(context);
                     }
                   });
                 }
 
                 if (newLevel != EnergyLevel.red) {
-                  _toolboxShown = false;
+                  if (_toolboxDialogOpen) {
+                    _resetToolboxAfterDismiss = true;
+                  } else {
+                    _toolboxShown = false;
+                  }
                 }
               },
             ),
@@ -77,8 +83,9 @@ class _EmotionalThermometerState extends State<EmotionalThermometer> {
     );
   }
 
-  void _showSensoryToolbox(BuildContext context) {
-    showDialog<void>(
+  Future<void> _showSensoryToolbox(BuildContext context) async {
+    _toolboxDialogOpen = true;
+    await showDialog<void>(
       context: context,
       builder: (_) => AlertDialog(
         title: const Text('Sensory Toolbox'),
@@ -102,5 +109,13 @@ class _EmotionalThermometerState extends State<EmotionalThermometer> {
         ],
       ),
     );
+    if (!mounted) return;
+    setState(() {
+      _toolboxDialogOpen = false;
+      if (_resetToolboxAfterDismiss) {
+        _toolboxShown = false;
+        _resetToolboxAfterDismiss = false;
+      }
+    });
   }
 }

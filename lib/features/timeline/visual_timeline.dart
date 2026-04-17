@@ -79,7 +79,10 @@ class _VisualCountdownState extends State<VisualCountdown> {
     super.initState();
     _remaining = widget.duration;
     _timer = Timer.periodic(const Duration(seconds: 1), (timer) {
-      if (!mounted) return;
+      if (!mounted) {
+        timer.cancel();
+        return;
+      }
       if (_remaining <= const Duration(seconds: 1)) {
         timer.cancel();
         setState(() => _remaining = Duration.zero);
