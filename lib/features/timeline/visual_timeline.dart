@@ -103,6 +103,8 @@ class _VisualCountdownState extends State<VisualCountdown> {
     const maxSafeDuration = Duration(days: 365);
     final totalSeconds = widget.duration.inSeconds.clamp(1, maxSafeDuration.inSeconds);
     final ratio = _remaining.inSeconds / totalSeconds;
+    final minutes = _remaining.inMinutes;
+    final seconds = (_remaining.inSeconds % 60).toString().padLeft(2, '0');
 
     return SizedBox(
       width: 54,
@@ -111,7 +113,7 @@ class _VisualCountdownState extends State<VisualCountdown> {
         painter: _TimeTimerPainter(progress: ratio),
         child: Center(
           child: Text(
-            _remaining.inMinutes.toString(),
+            '$minutes:$seconds',
             style: Theme.of(context).textTheme.labelLarge,
           ),
         ),
